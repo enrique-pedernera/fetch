@@ -15,7 +15,6 @@ let establecerDatos = function () {
                  {telefono: document.getElementById("telefono").value},
                  {dia: document.getElementById("fecha").value},
                  {monto: document.getElementById('monto').value}];
-
     localStorage.setItem("datos", JSON.stringify(datos));
 
     let mensaje = localStorage.getItem("datos");
@@ -26,21 +25,21 @@ let establecerDatos = function () {
     plazo = document.getElementById('plazo').value
     tasaAnual = document.getElementById('interes').value
     fechaInicio = new Date(document.getElementById('fecha').value)
-    fechaInicio.setDate(fechaInicio.getDate() + 1) 
+    fechaInicio.setDate(fechaInicio.getDate() + 1) //fecha actual
 
 
-    
+    //OPERADOR TERNARIO
     let plazoMensual = document.getElementById('mensual').checked   
     let plazoAnual = document.getElementById('anual').checked
 
-    if ( plazoMensual === true ) {   
+    if ( plazoMensual === true ) {    
         this.plazo = plazo
     } else if ( plazoAnual === true ) {  
         this.plazo = plazo * 12
     } else {
-        alert('No seleccionaste ningún tipo de plazo')  
+        alert('No seleccionaste ningún tipo de plazo') 
     }
-
+ 
 
     switch ( periodo ) {
         case 'semanal':
@@ -71,7 +70,6 @@ let datos = [{ id: 1, nombre: "Mariana", fecha: "11/5/2022", monto: "15000"},
              { id: 5, nombre: "Leonardo", fecha: "15/9/2022", monto: "400000"},
              { id: 6, nombre: "Juan", fecha: "16/9/2022", monto: "600000"}];
 
-
 localStorage.setItem("datos", JSON.stringify(datos));
 
 let mensaje = localStorage.getItem("datos");
@@ -84,6 +82,7 @@ for (let i = 0; i < localStorage.lenght; i++) {
     console.log("Valor: "+ localStorage.getItem(clave));
 }
 
+// Eliminar datos del storage
 localStorage.removeItem('');
 sessionStorage.removeItem('');
 localStorage.clear('') 
@@ -176,7 +175,7 @@ function simularPrestamo () {
     let pieTabla = document.createElement('tfoot')
     let fila = document.createElement('tr')
 
-    
+    //header de mi tabla
     for ( let j = 0; j < columnas.length; j++ ) {    
         let celda = document.createElement('td')
         let texto = columnas[j]
@@ -186,7 +185,7 @@ function simularPrestamo () {
     }
     cabeceraTabla.appendChild(fila)
 
-    
+    //cuerpo de mi tabla
     for ( let i = 0; i < totalPagos; i++ ) {    
         let intereses = Intereses(), impuestos = Impuestos(), capital = Capital(), insoluto = SaldoInsoluto()
         acumIntereses += intereses
@@ -274,6 +273,7 @@ function simularPrestamo () {
     tabla.appendChild(pieTabla)
     amortizaciones.appendChild(tabla)
 
+
     fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
         body: JSON.stringify({
@@ -289,7 +289,7 @@ function simularPrestamo () {
     .then((data) => console.log(data))
 
 }
-
+//librerias Sweet Alert 
 let guardar = document.getElementById("guardar");
 guardar.addEventListener("click", () => {
     Swal.fire({
@@ -311,11 +311,13 @@ guardar.addEventListener("click", () => {
       {dia: document.getElementById("fecha").value},
       {interes: document.getElementById('interes').value}];
 
+
 localStorage.setItem("guardarDatos", JSON.stringify(guardarDatos));
 
 let messagge = localStorage.getItem("guardarDatos");
 console.log(JSON.parse(messagge));
 });
+
 
 const DateTime = luxon.DateTime;
 
